@@ -1,3 +1,13 @@
+> ## 🚨 Important Notice
+>
+> This repository is a clone of the
+> [Testing React Apps legacy-module](https://github.com/kentcdodds/testing-react-apps)
+> by Kent C. Dodds. It has been published solely to document my GitHub activity
+> and for personal educational purposes.
+>
+> **Note:** This is not an official fork or a maintained derivative of the
+> original project.
+
 <div>
   <h1 align="center"><a href="https://www.epicreact.dev/modules/testing-react-apps-v1/testing-react-apps-welcome">🧐 Testing React Applications 🚀 EpicReact.Dev</a></h1>
   <strong>
