@@ -4,13 +4,20 @@
 import * as React from 'react'
 import {render, screen} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import faker from 'faker'
 import Login from '../../components/login'
+
+function createRandomUser() {
+  return {
+    username: faker.internet.userName(),
+    password: faker.internet.password(),
+  }
+}
 
 test('submitting the form calls onSubmit with username and password', async () => {
   const handleSubmit = jest.fn()
   render(<Login onSubmit={handleSubmit} />)
-  const username = 'Ruben'
-  const password = '123123'
+  const {username, password} = createRandomUser()
   const submitButton = screen.getByRole('button', {name: /submit/i})
 
   await userEvent.type(
