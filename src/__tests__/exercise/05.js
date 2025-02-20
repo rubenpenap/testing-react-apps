@@ -34,7 +34,7 @@ test(`logging in displays the user's username`, async () => {
   expect(screen.getByText(username)).toBeInTheDocument()
 })
 
-test(`omitting the pasword result in an error`, async () => {
+test(`omitting the password result in an error`, async () => {
   render(<Login />)
   const {username} = buildLoginForm()
 
