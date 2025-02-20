@@ -37,8 +37,10 @@ test('displays the users current location', async () => {
 
   render(<Location />)
   expect(screen.getByLabelText(/loading/i)).toBeInTheDocument()
-  resolve()
-  await act(() => promise)
+  await act(async () => {
+    resolve()
+    await promise
+  })
   expect(screen.queryByLabelText(/loading/i)).not.toBeInTheDocument()
   expect(screen.getByText(/latitude/i)).toHaveTextContent(
     `Latitude: ${fakePosition.coords.latitude}`,
