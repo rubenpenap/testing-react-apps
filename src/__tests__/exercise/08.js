@@ -5,56 +5,53 @@ import * as React from 'react'
 import {render, act} from '@testing-library/react'
 import useCounter from '../../components/use-counter'
 
+function setup({initialProps} = {}) {
+  const result = {}
+  function TestComponent() {
+    result.current = useCounter(initialProps)
+    return null
+  }
+  render(<TestComponent />)
+  return result
+}
+
 test('exposes the count and increment/decrement functions', () => {
-  let result
-  function TestComponent() {
-    result = useCounter()
-    return null
-  }
-  render(<TestComponent />)
-  expect(result.count).toBe(0)
+  const result = setup()
+  expect(result.current.count).toBe(0)
   act(() => {
-    result.increment()
+    result.current.increment()
   })
-  expect(result.count).toBe(1)
+  expect(result.current.count).toBe(1)
   act(() => {
-    result.decrement()
+    result.current.decrement()
   })
-  expect(result.count).toBe(0)
+  expect(result.current.count).toBe(0)
 })
+
 test('allows customization of the initial count', () => {
-  let result
-  function TestComponent() {
-    result = useCounter({initialCount: 2})
-    return null
-  }
-  render(<TestComponent />)
-  expect(result.count).toBe(2)
+  const result = setup({initialProps: {initialCount: 2}})
+  expect(result.current.count).toBe(2)
   act(() => {
-    result.increment()
+    result.current.increment()
   })
-  expect(result.count).toBe(3)
+  expect(result.current.count).toBe(3)
   act(() => {
-    result.decrement()
+    result.current.decrement()
   })
-  expect(result.count).toBe(2)
+  expect(result.current.count).toBe(2)
 })
+
 test('allows customization of the step', () => {
-  let result
-  function TestComponent() {
-    result = useCounter({step: 2})
-    return null
-  }
-  render(<TestComponent />)
-  expect(result.count).toBe(0)
+  const result = setup({initialProps: {step: 2}})
+  expect(result.current.count).toBe(0)
   act(() => {
-    result.increment()
+    result.current.increment()
   })
-  expect(result.count).toBe(2)
+  expect(result.current.count).toBe(2)
   act(() => {
-    result.decrement()
+    result.current.decrement()
   })
-  expect(result.count).toBe(0)
+  expect(result.current.count).toBe(0)
 })
 
 /* eslint no-unused-vars:0 */
