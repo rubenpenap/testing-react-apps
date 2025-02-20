@@ -22,5 +22,39 @@ test('exposes the count and increment/decrement functions', () => {
   })
   expect(result.count).toBe(0)
 })
+test('allows customization of the initial count', () => {
+  let result
+  function TestComponent() {
+    result = useCounter({initialCount: 2})
+    return null
+  }
+  render(<TestComponent />)
+  expect(result.count).toBe(2)
+  act(() => {
+    result.increment()
+  })
+  expect(result.count).toBe(3)
+  act(() => {
+    result.decrement()
+  })
+  expect(result.count).toBe(2)
+})
+test('allows customization of the step', () => {
+  let result
+  function TestComponent() {
+    result = useCounter({step: 2})
+    return null
+  }
+  render(<TestComponent />)
+  expect(result.count).toBe(0)
+  act(() => {
+    result.increment()
+  })
+  expect(result.count).toBe(2)
+  act(() => {
+    result.decrement()
+  })
+  expect(result.count).toBe(0)
+})
 
 /* eslint no-unused-vars:0 */
