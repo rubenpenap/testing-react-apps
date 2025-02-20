@@ -6,8 +6,8 @@ import {render, screen} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import useCounter from '../../components/use-counter'
 
-function UseCounterHookExample() {
-  const {count, increment, decrement} = useCounter()
+function UseCounterHookExample({initialCount = 0, step = 1} = {}) {
+  const {count, increment, decrement} = useCounter({initialCount, step})
   return (
     <div>
       <div>Current count: {count}</div>
@@ -28,6 +28,19 @@ test('exposes the count and increment/decrement functions', async () => {
   expect(message).toHaveTextContent('Current count: 1')
   await userEvent.click(decrement)
   expect(message).toHaveTextContent('Current count: 0')
+})
+
+test('exposes the count and increment/decrement functions with initialCount and step', async () => {
+  render(<UseCounterHookExample initialCount={2} step={2} />)
+  const increment = screen.getByRole('button', {name: /increment/i})
+  const decrement = screen.getByRole('button', {name: /decrement/i})
+  const message = screen.getByText(/current count/i)
+
+  expect(message).toHaveTextContent('Current count: 2')
+  await userEvent.click(increment)
+  expect(message).toHaveTextContent('Current count: 4')
+  await userEvent.click(decrement)
+  expect(message).toHaveTextContent('Current count: 2')
 })
 
 /* eslint no-unused-vars:0 */
